@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs"); //  Utilisé pour hacher les mots de passe.
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");  // Importation de jsonwebtoken pour la gestion des tokens (chaîne de caractères utilisée pour authentifier et autoriser des utilisateurs dans les systèmes informatiques).
 const multer = require("multer"); // Permet de gérer les formulaires multiparties combinés avec des fichiers.
 
 const User = require("../models/User");
@@ -67,5 +67,39 @@ router.post("/register", upload.single("profileImage"), async (req, res) => {
       .json({ message: "Enregistrement échoué !", error: err.message });
   }
 });
+
+/* Connexion utilisateur */
+router.post("/login", async (req, res) => {
+  try {
+    // Récupére l'email et le mot de passe depuis le corps de la requête
+    const { email, password } = req.body
+
+     // Cherche un utilisateur correspondant à l'email dans la base de données
+    const user = await User.findOne({ email });
+    if (!user) {
+      // Si l'utilisateur n'existe pas, renvoyer une réponse avec un statut 409
+      return res.status(409).json({ message: "User doesn't exist!" });
+    }
+
+     // Comparer le mot de passe fourni avec le mot de passe haché stocké
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+        // Si les mots de passe ne correspondent pas, renvoie une réponse avec un statut 400
+      return res.status(400).json({ message: "Invalid Credentials!"})
+    }
+  
+    // Création du token JWT avec l'id de l'utilisateur
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+     // Supprimer le mot de passe de l'objet utilisateur avant de l'envoyer
+    delete user.password
+
+    // Renvoie le token et les informations de l'utilisateur
+    res.status(200).json({ token, user })
+
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: err.message })
+  }
+})
 
 module.exports = router;

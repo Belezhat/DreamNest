@@ -20,11 +20,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        confirmPassword: {
-            type: String,
-            required: true,
-        },
-        profileImage: {
+        profileImagePath: {
             type: String,
             required: true,
             default:'',
@@ -47,7 +43,7 @@ const userSchema = new mongoose.Schema(
             default: [],
         }
     },
-    { timestamps: true }, // Ajout automatique des champs createdAt et updatedAt
+    { timestamps: true } // Ajout automatique des champs createdAt et updatedAt
 )
 
 // Création du modèle User basé sur le schéma défini
