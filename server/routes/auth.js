@@ -78,14 +78,14 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       // Si l'utilisateur n'existe pas, renvoyer une réponse avec un statut 409
-      return res.status(409).json({ message: "User doesn't exist!" });
+      return res.status(409).json({ message: "l'utilisateur n'existe pas!" });
     }
 
      // Comparer le mot de passe fourni avec le mot de passe haché stocké
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
         // Si les mots de passe ne correspondent pas, renvoie une réponse avec un statut 400
-      return res.status(400).json({ message: "Invalid Credentials!"})
+      return res.status(400).json({ message: "Mot de passe invalide!"})
     }
   
     // Création du token JWT avec l'id de l'utilisateur
