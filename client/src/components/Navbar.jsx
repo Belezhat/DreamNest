@@ -4,6 +4,7 @@ import variables from "../styles/variables.scss";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/Navbar.scss";
+// Permet de naviquer entre les pages.
 import { Link, useNavigate } from "react-router-dom";
 import { setLogout } from "../redux/state";
 

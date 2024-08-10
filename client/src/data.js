@@ -46,7 +46,7 @@ import { AiFillCar } from "react-icons/ai";
 
 export const categories = [
   {
-    label: "All",
+    label: "Voir toutes les catégories",
     icon: <BiWorld />,
   },
   {
@@ -213,7 +213,7 @@ export const facilities = [
     icon: <FaFireExtinguisher />,
   },
   {
-    name: "PREMIERS SECOURS",
+    name: "Premiers secours",
     icon: <BiSolidFirstAid />,
   },
   {
