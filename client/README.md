@@ -1,1 +1,1 @@
-<img src="assets/snap/dreamNest1.gif">
+![dreamNest1](./public/assets/snap/dreamNest1.gif)
