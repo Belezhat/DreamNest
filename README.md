@@ -2,4 +2,4 @@
 
 ![dreamNest2](./public/assets/snap/dreamNest2.gif)
 
-![dreamNest3](./public/assets/snap/dreamNest2.gif)
+![dreamNest3](./public/assets/snap/dreamNest3.gif)
