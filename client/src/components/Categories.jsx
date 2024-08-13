@@ -7,9 +7,9 @@ const Categories = () => {
     <div className="categories">
       <h1>Explorez les principales catégories</h1>
       <p>
-      Découvrez notre large gamme de locations de vacances qui répondent à tous les types de
-      voyageurs. Plongez-vous dans la culture locale, profitez du confort de
-      chez vous et créez des souvenirs inoubliables dans la destination de vos rêves.
+      Explorez notre vaste sélection de locations de vacances, conçue pour satisfaire tous les types de voyageurs. 
+      Immergez-vous dans la culture locale, profitez du confort de votre propre chez-soi, 
+      et créez des souvenirs inoubliables dans la destination de vos rêves.
       </p>
 
       <div className="categories_list">
