@@ -1,3 +1,4 @@
+// useCallback est utilisé pour mémoriser une fonction, afin d'éviter qu'elle ne soit recréée à chaque rendu du composant.
 import { useEffect, useState, useCallback } from "react";
 import { categories } from "../data";
 import "../styles/Listings.scss";
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setListings } from "../redux/state";
 
 const Listings = () => {
+  // fonction de Redux qui permet d'envoyer des actions pour modifier l'état global.
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");

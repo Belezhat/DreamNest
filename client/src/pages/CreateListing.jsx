@@ -93,6 +93,7 @@ const CreateListing = () => {
     });
   };
 
+  console.log(formDescription);
   const creatorId = useSelector((state) => state.user._id);
 
   const navigate = useNavigate();
