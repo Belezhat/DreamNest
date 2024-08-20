@@ -11,7 +11,7 @@ const cors = require("cors");
 
 // Importation des routes d'authentification
 const authRoutes = require('./routes/auth.js');
-
+const listingRoutes = require('./routes/listing.js');
 
 
 // Utilisation des middlewares
@@ -20,7 +20,8 @@ app.use(express.json()); // Pour parser le JSON des requêtes entrantes
 app.use(express.static('public')); // Sert les fichiers statiques du dossier 'public'
 
 // Définition des routes
-app.use("/auth", authRoutes); //  Toutes les routes définies dans authRoutes seront accessibles sous cette URL.
+app.use("/auth", authRoutes); // Toutes les routes définies dans authRoutes seront accessibles sous cette URL.
+app.use("/properties", listingRoutes) // Toutes les routes définies dans listingRoutes seront accessibles sous cette URL.
 
 const PORT = 3001;
 mongoose.connect(process.env.MONGO_URI, { // Connexion à la base de données

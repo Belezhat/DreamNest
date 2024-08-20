@@ -8,6 +8,9 @@ const User = require("../models/User");
 /* Configuration Multer pour le téléchargement de fichier */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    /* cb = "callback" fonction utilisée ppur indiquer à Multer ce qu'il doit faire ensuite
+    Elle prend généralement deux arguments !
+    */
     cb(null, "public/uploads/"); // Dossier de destination pour les fichiers téléchargés
   },
   filename: function (req, file, cb) {

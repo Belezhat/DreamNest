@@ -8,7 +8,7 @@ $breakpoints: (
     "xl": 1120px
 );
 
-// Un mixin est une fonction qui permet de réutiliser des blocs de styles dans plusieurs endroits de votre code sans avoir à les répéter.
+// Un mixin est une fonction qui permet de réutiliser des blocs de styles dans plusieurs endroits du code sans avoir à les répéter.
 @mixin sm {
     @media (max-width: map-get($breakpoints, "sm")) { // Utilise une requête média pour cibler les écrans de largeur maximale 480px
         @content; // Insère le contenu qui est passé lors de l'inclusion du mixin
