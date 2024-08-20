@@ -25,10 +25,8 @@ const ListingCard = ({
   booking,
 }) => {
 
-  // État local pour suivre l'index de la photo actuelle dans le diaporama
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Fonction pour aller à la photo précédente dans le diaporama
   const goToPrevSlide = () => {
     setCurrentIndex(
       (prevIndex) =>
@@ -36,7 +34,6 @@ const ListingCard = ({
     );
   };
 
-  // Fonction pour aller à la photo suivante dans le diaporama
   const goToNextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length);
   };
@@ -44,30 +41,32 @@ const ListingCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Accès à l'utilisateur actuel depuis l'état Redux
   const user = useSelector((state) => state.user);
-  // Récupération de la liste de souhaits de l'utilisateur, ou tableau vide si non définie
   const wishList = user?.wishList || [];
 
-  // Permet de verifier si un élément avec son identifiant spécifique se trouve dans la liste des favoris
   const isLiked = wishList?.find((item) => item?._id === listingId);
 
   const patchWishList = async () => {
     if (user?._id !== creator._id) {
-    const response = await fetch(
-      `http://localhost:3001/users/${user?._id}/${listingId}`,
-      {
-        // La méthode PACTH permet de modifier seulement certaines parties d'une ressource.
-        method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    dispatch(setWishList(data.wishList));
-  } else { return }
+      const response = await fetch(
+        `http://localhost:3001/users/${user?._id}/${listingId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      dispatch(setWishList(data.wishList));
+    } else {
+      return;
+    }
   };
+
+  // Formatage du prix en euros
+  const formattedPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
+  const formattedTotalPrice = totalPrice ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(totalPrice) : null;
 
   return (
     <div
@@ -79,7 +78,6 @@ const ListingCard = ({
       <div className="slider-container">
         <div
           className="slider"
-          /* Déplace le carrousel vers la gauche. Par exemple, si currentIndex est 1, l'image est déplacée de -100% de la largeur du conteneur, affichant la deuxième image. */
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {listingPhotoPaths?.map((photo, index) => (
@@ -91,7 +89,7 @@ const ListingCard = ({
               <div
                 className="prev-button"
                 onClick={(e) => {
-                  e.stopPropagation(); // Empêche l'événement de clic de se propager aux éléments parents. 
+                  e.stopPropagation();
                   goToPrevSlide(e);
                 }}
               >
@@ -120,7 +118,7 @@ const ListingCard = ({
         <>
           <p>{type}</p>
           <p>
-            <span>${price}</span> par nuit
+            <span>{formattedPrice}</span> par nuit
           </p>
         </>
       ) : (
@@ -129,7 +127,7 @@ const ListingCard = ({
             {startDate} - {endDate}
           </p>
           <p>
-            <span>${totalPrice}</span> prix total
+            <span>{formattedTotalPrice}</span> prix total
           </p>
         </>
       )}

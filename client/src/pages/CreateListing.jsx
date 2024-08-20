@@ -119,9 +119,8 @@ const CreateListing = () => {
       listingForm.append("amenities", amenities);
       listingForm.append("title", formDescription.title);
       listingForm.append("description", formDescription.description);
-      listingForm.append("highlight", formDescription.highlight);
-      listingForm.append("highlightDesc", formDescription.highlightDesc);
       listingForm.append("price", formDescription.price);
+      listingForm.append("currency", "EUR");
 
       /* Ajout de chaque photo sélectionné à l'objet FormData */
       photos.forEach((photo) => {
@@ -485,7 +484,7 @@ const CreateListing = () => {
               <span>€</span>
               <input
                 type="number"
-                placeholder="100"
+                placeholder="100€"
                 name="price"
                 value={formDescription.price}
                 onChange={handleChangeDescription}
